@@ -1,2 +1,5 @@
 _site/
 docs/
+
+renv/library/
+renv/staging/
