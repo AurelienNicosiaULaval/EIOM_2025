@@ -25,6 +25,24 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Detect runner OS
+        run: |
+          case "$RUNNER_OS" in
+            Linux)
+              echo "BUNDLE_EXT=linux.tar.gz" >> $GITHUB_ENV
+              ;;
+            Windows)
+              echo "BUNDLE_EXT=win.msi" >> $GITHUB_ENV
+              ;;
+            macOS)
+              echo "BUNDLE_EXT=mac.pkg" >> $GITHUB_ENV
+              ;;
+            *)
+              echo "$RUNNER_OS not supported"
+              exit 1
+              ;;
+          esac
+
       # Décommente un bloc si le site exécute du code pendant le render
       # (R + renv)
       - uses: r-lib/actions/setup-r@v2
