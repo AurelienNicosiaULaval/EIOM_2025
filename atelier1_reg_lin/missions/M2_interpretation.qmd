@@ -4,12 +4,15 @@ format: html
 ---
 
 ```{r}
-#source("../../utils/requirements.R")
-library(AmesHousing); set.seed(42); library(dplyr); library(broom)
-ames <- make_ames()
-idx <- sample(seq_len(nrow(ames)), size = floor(.8*nrow(ames)))
-train <- ames[idx,]; test <- ames[-idx,]
-mod <- lm(Sale_Price ~ Gr_Liv_Area + Overall_Qual + Year_Built + Full_Bath + Garage_Cars, data=train)
+source("../../utils/requirements.R")
+set.seed(42)
+ames <- AmesHousing::make_ames()
+idx <- sample(seq_len(nrow(ames)), size = floor(.8 * nrow(ames)))
+train <- ames[idx, ]; test <- ames[-idx, ]
+mod <- lm(
+  Sale_Price ~ Gr_Liv_Area + Overall_Qual + Year_Built + Full_Bath + Garage_Cars,
+  data = train
+)
 ```
 
 ## Tâches
